@@ -1,0 +1,241 @@
+body {
+  display: flex;
+  font-family: Arial, sans-serif;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #3b5086;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 0;
+}
+
+#form {
+  position: relative;
+  left: 5%;
+  width: 90%; /* Change to a relative width */
+  max-width: 1200px; /* Set a maximum width */
+  margin-top: 40px; /* Adiciona espaço superior ao formulário */
+}
+
+.form_label {
+  margin-top: 40px; /* Aumente para mover mais para baixo */
+  background-color: #ffff; /* Cor de fundo clara */
+  padding: 15px 20px; /* Ajustar preenchimento conforme necessário */
+  border-radius: 5px; /* Cantos arredondados */
+}
+
+.formContainer {
+  display: flex; /* Use flexbox */
+  flex-wrap: wrap; /* Permite itens quebrarem linha */
+  width: 100%; /* Largura total */
+  margin-top: 40px; /* Aumente para mover mais para baixo */
+  padding: 40px 30px 10px 20px; /* Ajustar preenchimento: superior, direita, inferior, esquerda */
+  background-color: #f3f3f3; /* Fundo cinza claro para seções */
+  border-radius: 10px; /* Cantos arredondados */
+
+  &.formulario-Cliente {
+    gap: 25px; /* Espaçamento entre os inputs */
+    margin-top: 30px; /* Ajustar para aproximar a etiqueta */
+    margin-bottom: 50px; /* Ajuste este valor para o espaçamento desejado */
+    
+    .form__group {
+      flex: 1 1 calc(25% - 20px); /* Aumenta para 25% em telas maiores */
+    }
+  }
+
+  &.formulario-renda,
+  &.formulario-pais,
+  &.formulario-redes {
+    gap: 30px; /* Espaçamento entre os inputs */
+    margin-top: 30px; /* Ajustar para aproximar a etiqueta */
+    margin-bottom: 50px; /* Ajuste este valor para o espaçamento desejado */
+    
+    .form__group {
+      flex: 1 1 calc(50% - 30px); /* Aumenta para 50% em telas maiores */
+    }
+  }
+
+  &.formulario-pagamento,
+  &.formulario-imovel {
+    gap: 20px; /* Espaçamento entre os inputs */
+    margin-top: 30px; /* Ajustar para aproximar a etiqueta */
+    margin-bottom: 100px; /* Ajuste este valor para o espaçamento desejado */
+    padding: 40px 30px 70px 20px; 
+    display: flex;
+    flex-direction: column; /* Dispor os elementos verticalmente */
+    
+    .form__group {
+      flex: 1 1 100%; /* Ocupa 100% da largura para ficar em uma linha */
+    }
+  }
+
+  /* Adicionando responsividade */
+  @media (max-width: 768px) {
+    &.formulario-Cliente .form__group,
+    &.formulario-renda .form__group,
+    &.formulario-pais .form__group,
+    &.formulario-redes .form__group {
+      flex: 1 1 100%; /* Fica em uma coluna em telas menores */
+    }
+  }
+}
+
+.form__group {
+  position: relative;
+  margin-bottom: 10px; /* Space between fields */
+  min-width: 200px; /* Prevent items from being too small */
+}
+
+.formulario-pagamento .formulario-imovel .form__group textarea.descricao-input {
+  padding: 10px; /* Preenchimento interno */
+  width: 100%; /* Largura completa */
+  height: 300px; /* Altura do textarea */
+  resize: none; /* Desabilita o redimensionamento */
+  box-sizing: border-box; /* Inclui padding e border no cálculo de largura e altura */
+  text-align: left; /* Alinha o texto à esquerda */
+  font-family: inherit; /* Herda a fonte do elemento pai */
+  font-size: inherit; /* Herda o tamanho da fonte do elemento pai */
+  overflow-wrap: break-word; /* Quebra palavras longas para evitar overflow */
+}
+
+.form__field {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc; /* Cor de borda */
+  border-radius: 10px; /* Bordas arredondadas */
+  outline: none;
+  transition: border-color 0.3s, padding 0.3s; /* Transição suave */
+
+  &:focus {
+    border-width: 3px; /* Largura da borda ao focar */
+    border-color: #b3b3b3; /* Cor da borda ao focar, se desejar */
+  }
+
+  /* Estilos aplicados a select para mantê-los consistentes com inputs */
+  &:focus + .form__label,
+  &:not([value=""]) + .form__label { /* Usar :not para verificar se o valor não está vazio */
+    top: -20px; /* Move o label para cima */
+    font-size: 12px; /* Tamanho da fonte do label quando focado */
+  }
+
+  /* Estilo específico para select */
+  select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc; /* Use a mesma cor de borda dos inputs */
+    border-radius: 10px; /* Mesma borda arredondada */
+    outline: none;
+    transition: border-color 0.3s; /* Transição suave */
+
+    &:focus {
+      border-width: 3px; /* Largura da borda ao focar */
+      border-color: #007bff; /* Cor da borda ao focar */
+    }
+  }
+}
+
+.form__label {
+  position: absolute;
+  left: 10px;
+  top: 50%; /* Vertical label position */
+  transform: translateY(-50%); /* Align properly */
+  font-size: 14px;
+  color: #000000; /* Default label color */
+  transition: all 0.3s ease; /* Smooth transition */
+  pointer-events: none; /* Prevent clicking on label */
+}
+
+/* Styles for field sizes */
+.medium_field,
+.small_field,
+.big_field,
+.smaller_field {
+  width: 100%; /* Ajustar conforme necessário */
+}
+
+/* Estilo para as células da tabela */
+table {
+  width: 100%; /* Ocupa toda a largura disponível */
+  border-collapse: collapse; /* Remove o espaço entre as bordas */
+  margin-top: 20px;
+}
+
+th, td {
+  padding: 10px; /* Adiciona espaçamento interno */
+  border: 1px solid #ccc; /* Borda leve */
+}
+
+th {
+  background-color: #f3f3f3; /* Fundo das colunas do cabeçalho */
+  text-align: center; /* Centraliza o texto no cabeçalho */
+}
+
+td input.form__field {
+  width: 100%; /* Ocupa a largura total da célula */
+  box-sizing: border-box; /* Inclui o padding na largura total */
+}
+
+.small_field {
+  max-width: 300px; /* Limite de largura para inputs */
+}
+
+.tiny_line {
+  display: flex; /* Ativa o layout flexível */
+  justify-content: space-between; /* Espaçamento igual entre os elementos */
+  align-items: flex-start; /* Alinha os elementos no topo */
+  gap: 30px; /* Espaçamento entre os campos */
+}
+
+.tiny_line .form__group {
+  flex: 1; /* Faz com que cada grupo de input ocupe o mesmo espaço */
+}
+
+.tiny_line .form__field {
+  width: 100%; /* Garante que o input ocupe a largura completa do contêiner */
+}
+
+.tiny_line .form__label {
+  margin-bottom: 4px; /* Espaço entre a label e o input */
+  display: block; /* Faz a label ocupar a linha completa */
+}
+
+/* Media queries para dispositivos móveis */
+@media (max-width: 768px) {
+  /* Para telas pequenas */
+
+  .form__group {
+    display: flex;
+    flex-direction: column; /* Itens empilhados verticalmente */
+    margin-bottom: 20px; /* Espaço entre os campos */
+  }
+
+  .form__group label {
+    margin-bottom: 5px; /* Espaço entre o label e o input */
+    font-weight: bold; /* Para destacar os labels */
+  }
+
+  .form__group input,
+  .form__group textarea {
+    padding: 10px; /* Preenchimento interno para campos */
+    border: 1px solid #ccc; /* Borda padrão */
+    border-radius: 5px; /* Cantos arredondados */
+    font-size: 14px; /* Tamanho da fonte */
+  }
+
+  .button {
+    background-color: #28a745; /* Cor do botão */
+    color: #fff; /* Cor do texto */
+    border: none; /* Remove borda padrão */
+    border-radius: 5px; /* Cantos arredondados */
+    padding: 10px 20px; /* Preenchimento do botão */
+    cursor: pointer; /* Indica que é clicável */
+  }
+
+  .button:hover {
+    background-color: #218838; /* Cor ao passar o mouse */
+  }
+}
